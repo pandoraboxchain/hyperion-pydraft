@@ -173,7 +173,7 @@ class Consensus():
         period = self.time_period
 
         if period.time_period.is_absence_period():
-            if chain.get_blocks_by_period(period.past_period())==None:
+            if self.chain.get_blocks_by_period(period.past_period())==None:
                 self.__gossip_sign__()
             else:
                 self.__gossip_with_block_sign__()
