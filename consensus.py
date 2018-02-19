@@ -38,9 +38,14 @@ class Chain:
             "user": user,
         }
 
-    def get_blocks_by_period():
-        #write
-        return None
+    def get_blocks_by_period(self, period):
+        if len(self.blocks)<=period:
+            return None
+        if not self.blocks[period]:
+            return None
+        if len(self.blocks[period])==0:
+            return None
+        return self.blocks[period]
 
 #blockgeneration
 #blockabsence
