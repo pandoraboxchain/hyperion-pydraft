@@ -23,7 +23,7 @@ class GossipWithBlock:
     def __init__(self, time_period, signers, block):
         self.time_period = time_period
         self.signers = signers
-		self.block = block
+        self.block = block
 
 class Chain:
 
@@ -58,8 +58,8 @@ class TimePeriod:
     def next_period(self):
         return TimePeriod(self.timenumber + 1)
 
-	def past_period(self):
-		return TimePeriod(self.timenumber + 1)
+    def past_period(self):
+        return TimePeriod(self.timenumber + 1)
 
 class User:
 
@@ -161,7 +161,7 @@ class Consensus():
             self.chain.append(ng)
         #TO-DO other signers
 
-	def __gossip_with_block_sign__(self):
+    def __gossip_with_block_sign__(self):
         abp = self.user_permissions.get_absence_block_permissions(self.time_period)
         uids = [item.uid for item in abp]
         if cp.user.uid in uids:
@@ -169,14 +169,14 @@ class Consensus():
             ng = GossipWithBlock(self.time_periodm, [self.user], block)
             self.chain.append(ng)
 
-	def sign_by_period(self):
+    def sign_by_period(self):
         period = self.time_period
 
         if period.time_period.is_absence_period():
             if chain.get_blocks_by_period(period.past_period())==None:
                 self.__gossip_sign__()
-			else:
-				self.__gossip_with_block_sign__()
+            else:
+                self.__gossip_with_block_sign__()
         if period.time_period.is_generation_period():
             self.__block_sign__()
 
