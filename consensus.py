@@ -161,6 +161,14 @@ class Consensus():
             self.chain.append(ng)
         #TO-DO other signers
 
+	def __gossip_with_block_sign__(self):
+        abp = self.user_permissions.get_absence_block_permissions(self.time_period)
+        uids = [item.uid for item in abp]
+        if cp.user.uid in uids:
+            block = self.chain.get_blocks_by_period(period.past_period())[0]
+            ng = GossipWithBlock(self.time_periodm, [self.user], block)
+            self.chain.append(ng)
+
 	def sign_by_period(self):
         period = self.time_period
 
