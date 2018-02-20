@@ -25,6 +25,9 @@ class GossipWithBlock:
         self.signers = signers
         self.block = block
 
+class RecoveryBlock:
+    pass
+
 class Chain:
 
     def __init__(self, blocks=[]):
@@ -46,6 +49,58 @@ class Chain:
         if len(self.blocks[period])==0:
             return None
         return self.blocks[period]
+
+    def generation_periods(self):
+        return self.blocks[0::2]
+
+    def absence_periods(self):
+        return self.blocks[1::2]
+
+    def validate(self, user_permissions):
+
+        cv = ChainValidator(self, user_permissions)
+        return cv.validate()
+
+
+class ChainValidator()
+
+    def __init__(self, chain, user_permissions):
+        self.chain = chain
+        self.user_permissions = user_permissions
+
+    def validate():
+        return true
+
+    def validate_generation_period_type():
+        for blocks in chain.generation_periods():
+            for block in blocks:
+                if not type(block) in [Block, RecoveryBlock]:
+                    return False
+        return True
+
+    def validate_absence_period_type():
+        for blocks in chain.absence_periods():
+            for block in blocks:
+                if not type(block) in [Gossip, GossipWithBlock]:
+                    return False
+        return True
+
+    def validate_single_for_all_except_gossip():
+        for blocks in self.blocks[period]:
+            if len(blocks)>1:
+                limit = True
+                for block in blocks:
+                    if type(block) != Gossip:
+                        if type(block) != GossipWithBlock:
+                            return False
+                        else:
+                            if limit:
+                                limit = False
+                            else:
+                                return False
+
+    #def validate_gossip_time_period():
+
 
 #blockgeneration
 #blockabsence
@@ -189,8 +244,11 @@ class Consensus():
         new = self.time_period.next_period()
         self.time_period = new
 
+    def validate_chain(self, chain):
+
+        for
+
     def compare_chain(self, chain):
-        if self.chain in self.chain
         #gossip priority
         #signer block priority
         #block count priority
